@@ -67,3 +67,10 @@ function DoubleSubFails() {
   deno.sub((channel, msg) => assert(false));
   deno.sub((channel, msg) => assert(false));
 }
+
+// The following join causes SnapshotBug to segfault.
+[].join("");
+
+function SnapshotBug() {
+  assert("1,2,3" === String([1, 2, 3]));
+}
