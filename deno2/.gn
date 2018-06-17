@@ -30,6 +30,8 @@ default_args = {
   v8_imminent_deprecation_warnings = false
   v8_monolithic = false
   v8_untrusted_code_mitigations = false
+  v8_use_multi_snapshots = false
+  v8_enable_embedded_builtins = false
 
   # This tells V8 to write out/Default/gen/v8/snapshot.bin
   # Which we can use to build our own snapshot.

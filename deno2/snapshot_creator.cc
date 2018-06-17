@@ -18,13 +18,14 @@ int main(int argc, char** argv) {
   const char* natives_out_cc = argv[4];
   const char* snapshot_out_cc = argv[5];
 
+  v8::V8::SetFlagsFromCommandLine(&argc, argv, true);
+
+  CHECK_EQ(argc, 6);
   CHECK_NE(js_fn, nullptr);
   CHECK_NE(natives_in_bin, nullptr);
   CHECK_NE(snapshot_in_bin, nullptr);
   CHECK_NE(natives_out_cc, nullptr);
   CHECK_NE(snapshot_out_cc, nullptr);
-
-  v8::V8::SetFlagsFromCommandLine(&argc, argv, true);
 
   std::string js_source;
   CHECK(deno::ReadFileToString(js_fn, &js_source));

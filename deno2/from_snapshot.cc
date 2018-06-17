@@ -11,8 +11,6 @@
 #include "./deno_internal.h"
 #include "include/deno.h"
 
-namespace deno {
-
 #ifdef DENO_MOCK_RUNTIME
 #include "natives_mock_runtime.cc"
 #include "snapshot_mock_runtime.cc"
@@ -20,6 +18,8 @@ namespace deno {
 #include "natives_deno.cc"
 #include "snapshot_deno.cc"
 #endif
+
+namespace deno {
 
 std::vector<InternalFieldData*> deserialized_data;
 
@@ -37,11 +37,8 @@ void DeserializeInternalFields(v8::Local<v8::Object> holder, int index,
 }
 
 Deno* NewFromSnapshot(void* data, deno_sub_cb cb) {
-  auto natives_blob = *StartupBlob_natives();
-  auto snapshot_blob = *StartupBlob_snapshot();
-
-  v8::V8::SetNativesDataBlob(&natives_blob);
-  v8::V8::SetSnapshotDataBlob(&snapshot_blob);
+  v8::V8::SetNativesDataBlob(StartupBlob_natives());
+  v8::V8::SetSnapshotDataBlob(StartupBlob_snapshot());
   v8::DeserializeInternalFieldsCallback(DeserializeInternalFields, nullptr);
 
   Deno* d = new Deno;

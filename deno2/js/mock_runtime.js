@@ -1,6 +1,5 @@
 // A simple runtime that doesn't involve typescript or protobufs to test
 // libdeno. Invoked by mock_runtime_test.cc
-const window = eval("this");
 
 function assert(cond) {
   if (!cond) throw Error("mock_runtime.js assert failed");
